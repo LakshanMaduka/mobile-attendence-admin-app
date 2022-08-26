@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "500326972663",
+    "firebase_url": "https://attendence-app2-default-rtdb.firebaseio.com",
+    "project_id": "attendence-app2",
+    "storage_bucket": "attendence-app2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500326972663:android:3a6000f58e97fd0a1567f2",
+        "android_client_info": {
+          "package_name": "com.example.attendence_admin_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500326972663-btq42b1q7d9q44kcq04rljuur7l9ggev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkzs9jiNBlFs61DzoVVO9xlxpMywqtZYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500326972663-btq42b1q7d9q44kcq04rljuur7l9ggev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500326972663:android:e91c7c4dafdd2eb31567f2",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500326972663-btq42b1q7d9q44kcq04rljuur7l9ggev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkzs9jiNBlFs61DzoVVO9xlxpMywqtZYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500326972663-btq42b1q7d9q44kcq04rljuur7l9ggev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
