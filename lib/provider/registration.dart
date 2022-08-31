@@ -9,6 +9,7 @@ class Register with ChangeNotifier {
   final String? address;
   final String? className;
   final String? phoneNum;
+  final String? keyStore;
 
   Register({
     @required this.id,
@@ -18,5 +19,6 @@ class Register with ChangeNotifier {
     @required this.address,
     @required this.className,
     @required this.phoneNum,
+    @required this.keyStore,
   });
 }

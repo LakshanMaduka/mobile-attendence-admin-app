@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:attendence_admin_app/provider/className.dart';
+import 'package:attendence_admin_app/service/getKey.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +9,7 @@ import './registration.dart';
 import 'dart:convert';
 
 class Registrations with ChangeNotifier {
+  final user = FirebaseAuth.instance.currentUser;
   // final url = Uri.parse(
   //     "https://attendence-app2-default-rtdb.firebaseio.com/products.json");
   //     http.post(url,)
@@ -39,7 +41,24 @@ class Registrations with ChangeNotifier {
           'indexNum': register.indexNum!,
           'className': register.className!,
           'address': register.address!,
-          'phoneNum': register.phoneNum!
+          'phoneNum': register.phoneNum!,
+          'key': KeyStore.genaratekeycode(),
+        }),
+      );
+    } catch (e) {
+      print(e);
+      throw e;
+    }
+  }
+
+  Future<http.Response> setKey({required String key}) async {
+    try {
+      return http.post(
+        Uri.parse(
+            'https://attendence-app2-default-rtdb.firebaseio.com/Keys.json'),
+        body: jsonEncode(<String, String>{
+          'key': KeyStore.genaratekeycode(),
+          'uid': user!.uid
         }),
       );
     } catch (e) {
@@ -118,7 +137,30 @@ class Registrations with ChangeNotifier {
             indexNum: regData['indexNum'],
             address: regData['address'],
             className: regData['className'],
-            phoneNum: regData['phoneNum']));
+            phoneNum: regData['phoneNum'],
+            keyStore: regData['key']));
+      });
+      _dataList = loadedRegistrations;
+      notifyListeners();
+    } catch (e) {}
+  }
+
+  Future<void> fetchkey() async {
+    final url = Uri.parse(
+        'https://attendence-app2-default-rtdb.firebaseio.com/Registration.json');
+    try {
+      final response = await http.get(url);
+      final extractedData = jsonDecode(response.body) as Map<String, dynamic>;
+      final List<Register> loadedRegistrations = [];
+      extractedData.forEach((regId, regData) {
+        loadedRegistrations.add(Register(
+            name: regData['name'],
+            email: regData['email'],
+            indexNum: regData['indexNum'],
+            address: regData['address'],
+            className: regData['className'],
+            phoneNum: regData['phoneNum'],
+            keyStore: regData['key']));
       });
       _dataList = loadedRegistrations;
       notifyListeners();
