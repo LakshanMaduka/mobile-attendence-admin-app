@@ -101,9 +101,9 @@ class Registrations with ChangeNotifier {
     required String email,
     required String password,
   }) async {
-    final serviceId = 'service_s1dsu73';
-    final templateId = 'template_sf3rfno';
-    final userId = 'XzbSf81WE_qXWmVtB';
+    const serviceId = 'service_s1dsu73';
+    const templateId = 'template_sf3rfno';
+    const userId = 'XzbSf81WE_qXWmVtB';
 
     final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
     final reponse = await http.post(url,
