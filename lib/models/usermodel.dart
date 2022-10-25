@@ -5,22 +5,24 @@ class UserModel extends ChangeNotifier {
   String name;
   String email;
   String phone;
-  String role;
-  String area;
+  String indexno;
+  String classname;
   String address;
   String date;
-  String imageurl;
+  String key;
+  String verifyText;
 
   UserModel({
     this.uid,
     required this.name,
     required this.email,
     required this.phone,
-    required this.role,
-    this.area = "",
+    required this.indexno,
+    this.classname = "",
     this.address = "",
     required this.date,
-    this.imageurl = "",
+    required this.key,
+    required this.verifyText,
   });
   Map<String, dynamic> toMap() {
     return {
@@ -28,25 +30,27 @@ class UserModel extends ChangeNotifier {
       'name': name,
       'email': email,
       'phone': phone,
-      'role': role,
-      'area': area,
+      'indexno': indexno,
+      'classname': classname,
       'address': address,
+      'key': key,
       'date': date,
-      'imageurl': imageurl,
+      'verifyText': verifyText,
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> res) {
     return UserModel(
-      uid: res['uid'],
+      uid: res['uid'] ?? "",
       name: res['name'],
       email: res['email'],
       phone: res['phone'] ?? "",
-      role: res['role'],
-      area: res['area'] ?? "",
+      indexno: res['indexno'],
+      classname: res['classname'] ?? "",
       date: res['date'],
+      key: res['key'],
       address: res['address'] ?? "",
-      imageurl: res['imageurl'] ?? "",
+      verifyText: res['verifyText'],
     );
   }
 
@@ -55,11 +59,11 @@ class UserModel extends ChangeNotifier {
     name = userModel.name;
     email = userModel.email;
     phone = userModel.phone;
-    role = userModel.role;
-    area = userModel.area;
+    indexno = userModel.indexno;
+    classname = userModel.classname;
     date = userModel.date;
     address = userModel.address;
-    imageurl = userModel.imageurl;
+    verifyText = userModel.verifyText;
     notifyListeners();
   }
 }

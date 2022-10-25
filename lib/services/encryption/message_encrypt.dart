@@ -24,8 +24,8 @@ class CryptoEncrpt {
   }
 
 //encrypt
-  static EnText ecryptText(String text) {
-    String keytext = eKey;
+  static EnText ecryptText(String text, String keyit) {
+    String keytext = keyit;
     final key = Key.fromUtf8(keytext);
     final iv = IV.fromLength(16);
     // print(iv.base64);

@@ -28,7 +28,7 @@ class CryptoEncryptFile {
   Future<EncryptedItem> encryptFile(File file) async {
     String dir = (await getApplicationDocumentsDirectory()).path;
     File outFile = File("$dir/fileenc.aes");
-    String keytext = eKey;
+    String keytext = KeyStore.genaratekeycode();
 
     bool outFileExists = await outFile.exists();
 

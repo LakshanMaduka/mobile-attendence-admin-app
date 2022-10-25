@@ -1,3 +1,7 @@
+import 'package:attendence_admin_app/data/initdata.dart';
+import 'package:attendence_admin_app/models/usermodel.dart';
+import 'package:attendence_admin_app/service/getKey.dart';
+import 'package:attendence_admin_app/services/firebase/fb_handeler.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -63,9 +67,20 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
     }
 
     _formKey.currentState!.save();
-
+    final vtext = KeyStore.genaratertext();
+    final key = KeyStore.genaratekeycode();
+    final usermodel = UserModel(
+        key: key,
+        name: _studentRegistation.name!,
+        email: _studentRegistation.email!,
+        phone: _studentRegistation.phoneNum!,
+        indexno: _studentRegistation.indexNum!,
+        date: DateTime.now().toIso8601String(),
+        verifyText: vtext);
     await Provider.of<Registrations>(context, listen: false)
         .registerStudent(_studentRegistation);
+    await FbHandeler.createDocManual(
+        usermodel.toMap(), CollectionPath.userpath, usermodel.email);
     await Provider.of<Registrations>(context, listen: false)
         .signUp(emailController.text.trim(), newPassword);
     await Provider.of<Registrations>(context, listen: false).sendEmail(
@@ -79,7 +94,7 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-              title: Text('Registration Successful'),
+              title: const Text('Registration Successful'),
               content: Text(
                   'Confermation email was sent to ' + emailController.text),
               actions: [
@@ -88,7 +103,7 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                       Navigator.of(context).pop();
                       Navigator.of(this.context).pop();
                     },
-                    child: Text('Ok'))
+                    child: const Text('Ok'))
               ],
             ));
 
@@ -99,7 +114,7 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register a student'),
+        title: const Text('Register a student'),
         backgroundColor: kPrimaryColor,
       ),
       body: _isLoading
@@ -216,7 +231,7 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                           },
                         ),
                         RoundedButton(
-                          text: Text('Regester'),
+                          text: const Text('Regester'),
                           press: () {
                             _saveForm(context);
                           },

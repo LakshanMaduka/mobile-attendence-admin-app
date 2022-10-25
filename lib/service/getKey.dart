@@ -8,4 +8,9 @@ class KeyStore {
     String keycode = randomAlphaNumeric(32);
     return keycode;
   }
+
+  static String genaratertext() {
+    String keycode = randomAlphaNumeric(25);
+    return keycode;
+  }
 }

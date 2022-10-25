@@ -2,6 +2,8 @@ import 'package:attendence_admin_app/data/initdata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../models/usermodel.dart';
+
 class FbHandeler {
   static final user = FirebaseAuth.instance.currentUser;
   static final firestoreInstance = FirebaseFirestore.instance;
@@ -99,4 +101,36 @@ class FbHandeler {
     }
     return res;
   }
+
+  static Future<UserModel> getUser() async {
+    String uid = user!.email.toString();
+    const String collectionpath = "/users/";
+    UserModel model;
+
+    DocumentSnapshot documentSnapshot =
+        await firestoreInstance.collection(collectionpath).doc(uid).get();
+    model = UserModel.fromMap(documentSnapshot.data() as Map<String, dynamic>);
+    return model;
+  }
+
+  // static Future<List<UserModel>> getFuel(String vtext) async {
+  //   List<UserModel> list = [];
+  //   UserModel userModel;
+  //   // QuerySnapshot
+
+  //   final querySnapshot = await firestoreInstance
+  //       .collection("/users/")
+  //       .where("verifyText", isEqualTo: vtext)
+  //       .get();
+  //   print(querySnapshot.docs);
+
+  //   for (int i = 0; i < querySnapshot.docs.length; i++) {
+  //     var a = querySnapshot.docs[i];
+  //     // userModel = userModel.fromSnapshot(a);
+  //     userModel = UserModel.fromMap(a.data());
+  //     list.add(userModel);
+  //     print(userModel.toMap());
+  //   }
+  //   return list;
+  // }
 }
